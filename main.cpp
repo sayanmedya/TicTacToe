@@ -1,5 +1,5 @@
 #include <iostream>
-#include "tictactoe.h"
+#include "tictactoe.cpp"
 using namespace std;
 
 int main()
