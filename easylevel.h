@@ -1,15 +1,26 @@
-#ifndef EASYLEVEL_DECLARATION
-#define EASYLEVEL_DECLARATION
+#ifndef EASYLEVEL_H
+#define EASYLEVEL_H
 
+#include <iostream>
+#include <vector>
+#include <ctime>
 #include "tictactoe.h"
+#define pii pair<int, int>
+using namespace std;
 
 class easylevel:public tictactoe {
-    protected:
-        bool is_winning();
-        bool is_losing();
-        void random_move();
     public:
+        bool is_winning(char ch);
+        void random_move();
+        vector <pii> st_done;
+        vector <pair<pii, char>>st_undone;
+        easylevel();
+        void undo();
+        void redo();
+        void push_new_done(int x, int y);
         void make_move();
+        char input(char);
+        void do_last_move(char c);
 };
 
 #endif
