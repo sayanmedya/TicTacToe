@@ -1,9 +1,16 @@
-#ifndef TICTACTOE_DEFINITION
-#define TICTACTOE_DEFINITION
-
-#include <iostream>
 #include "tictactoe.h"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
+
+void sleepcp(int milliseconds)
+{
+    clock_t time_again;
+    time_again = clock() + milliseconds * CLOCKS_PER_SEC/1000;
+    while (clock() < time_again)
+    {
+    }
+}
 
 tictactoe::tictactoe()
 {
@@ -14,27 +21,37 @@ tictactoe::tictactoe()
 
 void tictactoe::print_grid()
 {
+    system("clear");
     for (int i = 0;i < 3;i++) {
         for (int j = 0;j < 3;j++)
             if (grid[i][j] == 'X')
-                cout << "\033[1m\033[31mX \033[0m";
+                cout << "\033[1m\033[31m X\033[0m";
             else if (grid[i][j] == 'O')
-                cout << "\033[1m\033[34mO \033[0m";
+                cout << "\033[1m\033[34m O\033[0m";
             else
-                cout << grid[i][j] << " ";
+                cout << " " << grid[i][j];
         cout << "\n";
     }
+    cout << "\n\n\n\n\n\nz ~ undo\nr ~ redo\nb ~ back\nq ~ quit\033[9A\033[8D";
 }
 
-void tictactoe::input(char c)
+char tictactoe::input(char c)
 {
-    int x, y;
-    cin >> x >> y;
-    while (grid[x - 1][y - 1] != '-' || x < 1 || x > 3 || y < 1 || y > 3) {
-        cout << "Wrong input. Try again: ";
-        cin >> x >> y;
+    int p, x, y;
+    char in = getch();
+    p = in - 48;
+    x = 2 - (p - 1) / 3;
+    y = (p - 1) % 3;
+    while ((grid[x][y] != '-' || p < 1 || p > 9) && in != 'q' && in != 'Q' && in != 'b' && in != 'B') {
+        cout << "\033[1AWrong input. Try again: ";
+        in = getch();
+        p = in - 48;
+        x = 2 - (p - 1) / 3;
+        y = (p - 1) % 3;
     }
-    grid[x - 1][y - 1] = c;
+    if (p >= 1 && p <= 9)
+        grid[x][y] = c;
+    return in;
 }
 
 bool tictactoe::if_won()
@@ -52,4 +69,12 @@ bool tictactoe::if_won()
     return 0;
 }
 
-#endif
+void tictactoe::do_last_move(char c)
+{
+    for (int i = 0;i < 3;i++)
+        for (int j = 0;j < 3;j++)
+            if (grid[i][j] == '-') {
+                grid[i][j] = c;
+                return;
+            }
+}
