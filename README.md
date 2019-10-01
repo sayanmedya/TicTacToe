@@ -7,3 +7,6 @@ Compile and run:
 g++ main.cpp tictactoe.cpp easylevel.cpp hardlevel.cpp getch.cpp
 ./a.out
 ```
+![Pic 1](/images/VirtualBox_Ubuntu%2018.04%20LTS_02_10_2019_02_02_41.png)
+![Pic 2](/images/VirtualBox_Ubuntu%2018.04%20LTS_02_10_2019_02_03_29.png)
+![Pic 3](/images/VirtualBox_Ubuntu%2018.04%20LTS_02_10_2019_02_05_07.png)
